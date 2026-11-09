@@ -1,0 +1,27 @@
+# Local configuration and credentials
+local.properties
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.pem
+*.p12
+
+# Generated build / test / release files
+.gradle/
+.kotlin/
+**/build/
+verification/
+release/
+*.apk
+*.aab
+*.apks
+*.idsig
+/SHA256SUMS
+
+# Editors and OS files
+.idea/
+*.iml
+.DS_Store
+Thumbs.db

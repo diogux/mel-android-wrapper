@@ -1,0 +1,17 @@
+gradle.projectsEvaluated {
+    rootProject.tasks.register('writeBuildInventory') {
+        doLast {
+            def found = new TreeSet<String>()
+            rootProject.allprojects.each { p ->
+                p.buildscript.configurations.findAll { it.canBeResolved }.each { c ->
+                    c.resolvedConfiguration.resolvedArtifacts.each { a -> found.add(a.moduleVersion.id.toString()) }
+                }
+                ['debugRuntimeClasspath','debugUnitTestRuntimeClasspath','kotlinCompilerClasspath'].each { name ->
+                    def c = p.configurations.findByName(name)
+                    if(c != null && c.canBeResolved) c.resolvedConfiguration.resolvedArtifacts.each { a -> found.add(a.moduleVersion.id.toString()) }
+                }
+            }
+            new File(rootProject.rootDir, 'dependency-inventory.txt').text = found.join('\n') + '\n'
+        }
+    }
+}

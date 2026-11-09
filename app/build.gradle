@@ -1,0 +1,23 @@
+plugins { id 'com.android.application'; id 'org.jetbrains.kotlin.android' }
+android {
+    buildFeatures { buildConfig true }
+    namespace 'com.diogu.airconditioner'
+    compileSdk 35
+    buildToolsVersion '35.0.0'
+    defaultConfig {
+        applicationId 'com.diogu.airconditioner'
+        minSdk 26
+        targetSdk 35
+        versionCode 7
+        versionName '3.4'
+    }
+    testOptions { unitTests.includeAndroidResources = true }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    kotlinOptions { jvmTarget = '17' }
+    buildTypes { debug { minifyEnabled true; proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' } }
+}
+dependencies {
+    testImplementation 'org.robolectric:robolectric:4.14.1'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.json:json:20240303'
+}

@@ -1,0 +1,49 @@
+name: Android checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Build, test and lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Set up Java 21
+        uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+      - name: Install required Android SDK components
+        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Build, test and lint
+        run: ./gradlew --no-daemon :app:assembleDebug :app:testDebugUnitTest :app:lintDebug
+      - name: Summarize tests
+        if: always()
+        shell: python
+        run: |
+          import os
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          reports = list(Path('app/build/test-results/testDebugUnitTest').glob('TEST-*.xml'))
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write('## Android verification\n\n')
+              if not reports:
+                  summary.write('No JUnit reports produced; inspect the build step.\n')
+              for report in sorted(reports):
+                  suite = ET.parse(report).getroot()
+                  summary.write(f"- **{suite.attrib['name'].split('.')[-1]}**: {suite.attrib['tests']} tests, {suite.attrib['failures']} failures, {suite.attrib['errors']} errors\n")
+              summary.write('\nAPKs are published only through the rolling Latest release. CI does not upload unsigned or differently signed builds.\n')

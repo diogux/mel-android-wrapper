@@ -1,0 +1,31 @@
+name: Bug report
+description: Report a reproducible app or widget problem.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include passwords, tokens, authorization codes or unredacted account data."
+  - type: input
+    id: environment
+    attributes:
+      label: App / Android / device
+      description: App version, Android version, phone/launcher, and AC model if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshots or extra context
+      description: Remove personal information before attaching media.

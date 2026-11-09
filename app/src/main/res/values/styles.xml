@@ -1,0 +1,31 @@
+<resources>
+    <style name="AppTheme" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:colorAccent">#CDE8B7</item>
+        <item name="android:windowBackground">#0E1719</item>
+        <item name="android:navigationBarColor">#0E1719</item>
+        <item name="android:statusBarColor">#0E1719</item>
+    </style>
+    <item name="temperature_slider" type="id"/>
+    <string name="widget_description">Control your selected room: power, mode and temperature.</string>
+    <string name="release_temperature">%1$s  ·  release to set</string>
+    <string name="widget_1">Air Conditioner</string>
+    <string name="widget_2">Refresh</string>
+    <string name="widget_3">Refresh cloud state</string>
+    <string name="widget_4">—</string>
+    <string name="widget_5">Room —</string>
+    <string name="widget_6">−</string>
+    <string name="widget_7">Decrease target temperature</string>
+    <string name="widget_8">Mode</string>
+    <string name="widget_9">Cycle operating mode</string>
+    <string name="widget_10">+</string>
+    <string name="widget_11">Increase target temperature</string>
+    <string name="widget_12">On</string>
+    <string name="widget_13">Toggle power</string>
+    <string name="widget_14">Open app to sign in</string>
+    <string name="adjust_temperature">%1$s  ·  slide to adjust</string>
+    <string name="airflow_summary">Fan  %1$s  ·  Vanes  %2$s</string>
+    <string name="schedule_enabled">Schedule enabled</string>
+    <string name="schedule_power">Turn air conditioner on (untick for off)</string>
+</resources>
