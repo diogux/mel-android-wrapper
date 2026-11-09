@@ -41,3 +41,7 @@ The first build downloads these artifacts automatically:
 ```
 
 Existing ffmpeg/ffprobe were used to inspect a user-supplied bug recording; they were not installed for this project and are not needed to build. User recordings, machine-specific paths, SDKs/caches and signing keys are excluded from the repository. Repository preparation added no new local software installations.
+
+## GitHub-hosted checks
+
+The CI workflow installs the same pinned command-line tools archive (`15859902`) through `android-actions/setup-android`, then platform-tools, platform API 35 and build-tools 35.0.0 on the ephemeral runner. Java 21 is set up by `actions/setup-java`. Action revisions are pinned in the workflow. This adds no software to the maintainer's computer and publishes no CI-generated signing key or APK.
